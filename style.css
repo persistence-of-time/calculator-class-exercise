@@ -151,6 +151,12 @@ figcaption {
     margin: 5px 0;
     display: none;
 }
+ 
+.peapod.active,
+.freshdirect.active,
+.amazon.active {
+    display: block;
+}
 
 
 /**

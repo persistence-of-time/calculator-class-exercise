@@ -13,3 +13,41 @@ function round_number(num) {
 
     return num;
 }
+
+//get all of the calculator inputs
+const input = document.querySelectorAll("[name='qty']");
+
+//evlaluate all of the calculator inputs
+input.forEach(function (input) {
+    //for each individual input, listen for change
+    input.addEventListener("change", function (e) {
+        const this_input = e.target;
+            const qty = parseFloat(e.target.value);
+            const this_row = this_input.closest(".row");
+            
+            const amazon = this_row.querySelector(".amazon");
+            const amazon_span = amazon.querySelector("span");
+            const amazon_price = parseFloat(amazon.dataset.price);
+            const amazon_cost = qty * amazon_price;
+            
+            amazon_span.innerHTML = amazon_cost;
+            amazon.classList.add("active");
+
+            const freshdirect= this_row.querySelector(".freshdirect");
+            const freshdirect_span = freshdirect.querySelector("span");
+            const freshdirect_price = parseFloat(freshdirect.dataset.price);
+            const freshdirect_cost = qty * freshdirect_price;
+
+            freshdirect_span.innerHTML = freshdirect_cost;
+            freshdirect.classList.add("active");
+
+            const peapod = this_row.querySelector(".peapod");
+            const peapod_span = peapod.querySelector("span");
+            const peapod_price = parseFloat(peapod.dataset.price);
+            const peapod_cost = qty * peapod_price;
+            
+            peapod_span.innerHTML = peapod_cost;
+            peapod.classList.add("active");
+            
+    });
+});
