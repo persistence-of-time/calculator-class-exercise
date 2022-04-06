@@ -30,7 +30,7 @@ input.forEach(function (input) {
             const amazon_price = parseFloat(amazon.dataset.price);
             const amazon_cost = qty * amazon_price;
             
-            amazon_span.innerHTML = amazon_cost;
+            amazon_span.innerHTML = round_number(amazon_cost);
             amazon.classList.add("active");
 
             const freshdirect= this_row.querySelector(".freshdirect");
@@ -38,7 +38,7 @@ input.forEach(function (input) {
             const freshdirect_price = parseFloat(freshdirect.dataset.price);
             const freshdirect_cost = qty * freshdirect_price;
 
-            freshdirect_span.innerHTML = freshdirect_cost;
+            freshdirect_span.innerHTML = round_number(freshdirect_cost);
             freshdirect.classList.add("active");
 
             const peapod = this_row.querySelector(".peapod");
@@ -46,8 +46,33 @@ input.forEach(function (input) {
             const peapod_price = parseFloat(peapod.dataset.price);
             const peapod_cost = qty * peapod_price;
             
-            peapod_span.innerHTML = peapod_cost;
+            peapod_span.innerHTML = round_number(peapod_cost);
             peapod.classList.add("active");
-            
+
+            let cheap = false;
+
+            if (amazon_cost < freshdirect_cost && amazon_cost < peapod_cost) {
+                cheap = amazon;
+            }
+
+            if (freshdirect_cost < amazon_cost && freshdirect_cost < peapod_cost) {
+                cheap = freshdirect;
+            }
+
+            if (peapod_cost < amazon_cost && peapod_cost < freshdirect_cost) {
+                cheap = peapod;
+            }
+
+           const current_cheap = this_row.querySelector(".cheap");
+
+           if (current_cheap) {
+               current_cheap.classList.remove("cheap");
+           }
+           
+           if (cheap) { 
+           cheap.classList.add("cheap");
+           }
+
+
     });
 });
